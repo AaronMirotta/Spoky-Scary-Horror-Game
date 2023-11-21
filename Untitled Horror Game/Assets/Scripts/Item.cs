@@ -6,13 +6,16 @@ public class Item : MonoBehaviour, IInteractable
 {
     //holds all information for the inventory and inspection systems
     [SerializeField]
-    string ItemName;
+    private string itemName;
+    public string ItemName { get { return itemName; } }
 
     [SerializeField]
-    string ItemDescription;
+    private string itemDescription;
+    public string ItemDescription { get { return itemDescription; } }
 
     [SerializeField]
-    Sprite itemInspectSprite;
+    private Sprite itemInspectSprite;
+    public Sprite ItemInspectSprite { get { return itemInspectSprite; } }
 
     public void Interact()
     {
@@ -21,6 +24,9 @@ public class Item : MonoBehaviour, IInteractable
 
     private void Pickup()
     {
+        //add item to the players inventory
+        PlayerController.Instance.AddToInventory(this);
 
+        this.gameObject.SetActive(false);
     }
 }

@@ -15,11 +15,6 @@ public class PlayerController : MonoBehaviour
     {
         get { return instance; }
     }
-    
-    private enum MovementMethod { Keyboard, PointClick };
-
-    [SerializeField]
-    private MovementMethod currentMovementMethod;
 
     [SerializeField]
     private float speed;
@@ -28,11 +23,12 @@ public class PlayerController : MonoBehaviour
 
     private InputAction move;
     private InputAction interact;
-    private InputAction inventory;
+    private InputAction openInventory;
 
     private bool isGrounded;
 
     //ground detection
+    [Header("Groundd Detection")]
     [SerializeField]
     private Vector3 groundPos;
     [SerializeField]
@@ -43,6 +39,7 @@ public class PlayerController : MonoBehaviour
     private LayerMask groundMask;
 
     //interaction
+    [Header("Interaction Options")]
     [SerializeField]
     private Vector2 interactablePosOffset;
 
@@ -54,9 +51,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float interactRange;
 
+    //Inventory
+    [SerializeField]
+    private List<Item> inventory = new List<Item>();
+    public List<Item> Inventory { get { return inventory; } }
+    
+    
+    private Vector2 playerTargetPos;
     private Rigidbody2D rb;
-
-    private Vector3 playerTargetPos;
 
     private void OnEnable()
     {
@@ -67,15 +69,15 @@ public class PlayerController : MonoBehaviour
         interact.Enable();
         interact.performed += Interact;
 
-        inventory = playerControls.Player.Inventory;
-        inventory.Enable();
-        inventory.performed += OpenInventory;
+        openInventory = playerControls.Player.Inventory;
+        openInventory.Enable();
+        openInventory.performed += OpenInventory;
     }
     private void OnDisable()
     {
         move.Disable();
         interact.Disable();
-        inventory.Disable();
+        openInventory.Disable();
     }
     private void Awake()
     {
@@ -94,13 +96,11 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
-        playerTargetPos = transform.position;
     }
     private void Update()
     {
         isGrounded = GroundDetect();
-
-        if (currentMovementMethod == MovementMethod.Keyboard) { KeyboardMovement(); }
+        KeyboardMovement();
 
         //
         InteractionIcon();
@@ -165,14 +165,15 @@ public class PlayerController : MonoBehaviour
     private void Interact(InputAction.CallbackContext context)
     {
         //interact with object parented to InteractIcon
-        Transform parent = interactIcon.transform.parent;
-
-        Debug.Log(parent.name);
-
-        if(parent.TryGetComponent<IInteractable>(out IInteractable interactable))
+        if(interactIcon != null)
         {
-            interactable.Interact();
-        }
+            Transform parent = interactIcon.transform.parent;
+
+            if(parent.TryGetComponent<IInteractable>(out IInteractable interactable))
+            {
+                interactable.Interact();
+            }
+        }   
     }
     private void OpenInventory(InputAction.CallbackContext context)
     {
@@ -205,7 +206,6 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(moveX, moveY / 2) * speed;
         }
     }
-
     private bool GroundDetect()
     {
         RaycastHit2D hit = Physics2D.CircleCast(transform.position + groundPos, groundRadius, Vector2.down, groundDist, groundMask);
@@ -235,6 +235,12 @@ public class PlayerController : MonoBehaviour
     {
         playerTargetPos = transform.position;
     }
+
+    public void AddToInventory(Item item)
+    {
+        inventory.Add(item);
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;

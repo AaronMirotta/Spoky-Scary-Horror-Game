@@ -130,8 +130,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dbe0182c22720c47a40632fda27e336, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemName: Test Item
-  ItemDescription: This is a test item
+  itemName: This Is A test Item
+  itemDescription: Blah Blah Blah Your A Silly Goose!
   itemInspectSprite: {fileID: 21300000, guid: de2d3b35bf5741d4d8fcd585af97c116, type: 3}
 --- !u!61 &6657990309720770877
 BoxCollider2D:

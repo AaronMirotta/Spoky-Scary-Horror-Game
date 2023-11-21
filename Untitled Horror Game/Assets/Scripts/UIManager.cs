@@ -32,8 +32,14 @@ public class UIManager : MonoBehaviour
     }
     public void OpenInventory()
     {
+        //set inventory active and select the first item in the inventory
         InventoryUI.SetActive(true);
         isInventoryOpen = true;
+
+        if(InventoryUI.TryGetComponent<InventoryUI>(out InventoryUI inventory))
+        {
+            inventory.Open();
+        }
     }
     public void CloseInventory()
     {
