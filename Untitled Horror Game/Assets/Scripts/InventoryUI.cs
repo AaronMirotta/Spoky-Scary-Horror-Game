@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class InventoryUI : MonoBehaviour
 {
@@ -22,12 +24,12 @@ public class InventoryUI : MonoBehaviour
     private List<Item> inventoryItems = new List<Item>();
 
     [SerializeField]
-    private List<Button> inventoryButtons = new List<Button>();
+    private List<GameObject> inventoryButtons = new List<GameObject>();
 
     private void ScrollInventory()
     {
 
-    }    
+    }
     public void InspectItem(Item item)
     {
         if (inspectPanel.activeSelf)
@@ -37,7 +39,7 @@ public class InventoryUI : MonoBehaviour
         else
         {
             inspectPanel.SetActive(true);
-            if(inspectPanel.GetComponentInChildren<InspectPanel>() != null)
+            if (inspectPanel.GetComponentInChildren<InspectPanel>() != null)
             {
                 InspectPanel inspect = inspectPanel.GetComponentInChildren<InspectPanel>();
                 inspect.SetInspect(item.ItemInspectSprite, item.ItemName, item.ItemDescription);
@@ -45,24 +47,31 @@ public class InventoryUI : MonoBehaviour
 
         }
     }
-    public void Open()
+    public void AddItem(Item newItem)
     {
-        inventoryItems = PlayerController.Instance.Inventory;
+        EventSystem.current.SetSelectedGameObject(null);
 
-        foreach(Item item in inventoryItems)
+        inventoryItems.Add(newItem);
+
+        GameObject newObject = Instantiate(inventoryItemPrefab, inventoryContent.transform);
+
+        if (newObject.TryGetComponent<Button>(out Button button))
         {
-            GameObject newObject = Instantiate(inventoryItemPrefab, inventoryContent.transform);
+            inventoryButtons.Add(newObject);
 
-            if(newObject.TryGetComponent<Button>(out Button button))
-            {
-                inventoryButtons.Add(button);
+            //setup button in UI
+            button.onClick.AddListener(() => InspectItem(newItem));
 
-                //setup button in UI
-                button.onClick.AddListener(() => InspectItem(item));
-
-                button.image.sprite = item.ItemInspectSprite;
-            }
+            button.image.sprite = newItem.ItemInspectSprite;
         }
     }
-    
+    public void Open()
+    {
+        Debug.Log(inventoryItems.Count);
+        if(inventoryItems.Count > 0)
+        {
+            EventSystem.current.SetSelectedGameObject(inventoryButtons[0]);
+            Debug.Log("Selecting: " + EventSystem.current.currentSelectedGameObject.name);
+        }
+    }
 }

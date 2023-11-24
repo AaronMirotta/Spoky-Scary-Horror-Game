@@ -12,6 +12,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject InventoryUI;
 
+    [SerializeField]
+    private InventoryUI inventory;
+
     public bool isInventoryOpen;
 
     private void Awake()
@@ -36,10 +39,8 @@ public class UIManager : MonoBehaviour
         InventoryUI.SetActive(true);
         isInventoryOpen = true;
 
-        if(InventoryUI.TryGetComponent<InventoryUI>(out InventoryUI inventory))
-        {
-            inventory.Open();
-        }
+        inventory.Open();
+
     }
     public void CloseInventory()
     {

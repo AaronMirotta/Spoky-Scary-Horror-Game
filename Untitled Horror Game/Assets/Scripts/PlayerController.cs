@@ -53,9 +53,10 @@ public class PlayerController : MonoBehaviour
 
     //Inventory
     [SerializeField]
-    private List<Item> inventory = new List<Item>();
-    public List<Item> Inventory { get { return inventory; } }
-    
+    private bool inventoryOpen;
+    public bool InventoryOpen { get { return inventoryOpen; } set { inventoryOpen = value; } }
+
+    private InventoryUI inventoryUI;
     
     private Vector2 playerTargetPos;
     private Rigidbody2D rb;
@@ -100,10 +101,20 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         isGrounded = GroundDetect();
-        KeyboardMovement();
+
+        if (!inventoryOpen)
+        {
+            KeyboardMovement();
+        }
+        else
+        {
+            rb.velocity = Vector2.zero;
+        }
 
         //
         InteractionIcon();
+
+        inventoryOpen = UIManager.Instance.isInventoryOpen;
 
     }
     private void InteractionIcon()//shows icon on over the closest object to the player
@@ -165,7 +176,7 @@ public class PlayerController : MonoBehaviour
     private void Interact(InputAction.CallbackContext context)
     {
         //interact with object parented to InteractIcon
-        if(interactIcon != null)
+        if(interactIcon != null && !inventoryOpen)
         {
             Transform parent = interactIcon.transform.parent;
 
@@ -238,7 +249,9 @@ public class PlayerController : MonoBehaviour
 
     public void AddToInventory(Item item)
     {
-        inventory.Add(item);
+        inventoryUI = FindObjectOfType<InventoryUI>();
+
+        inventoryUI.AddItem(item);
     }
 
     private void OnDrawGizmos()
