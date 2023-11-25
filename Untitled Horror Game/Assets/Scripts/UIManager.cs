@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour
 
     //UI components
     [SerializeField]
-    private GameObject InventoryUI;
+    private GameObject inventoryUI;
 
     [SerializeField]
     private InventoryUI inventory;
@@ -36,7 +36,7 @@ public class UIManager : MonoBehaviour
     public void OpenInventory()
     {
         //set inventory active and select the first item in the inventory
-        InventoryUI.SetActive(true);
+        inventoryUI.SetActive(true);
         isInventoryOpen = true;
 
         inventory.Open();
@@ -44,7 +44,7 @@ public class UIManager : MonoBehaviour
     }
     public void CloseInventory()
     {
-        InventoryUI.SetActive(false);
+        inventoryUI.SetActive(false);
         isInventoryOpen = false;
     }
 }

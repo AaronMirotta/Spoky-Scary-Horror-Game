@@ -26,9 +26,62 @@ public class InventoryUI : MonoBehaviour
     [SerializeField]
     private List<GameObject> inventoryButtons = new List<GameObject>();
 
-    private void ScrollInventory()
-    {
+    [SerializeField]
+    private RectTransform scrollRect;
 
+    [SerializeField]
+    private RectTransform contentPanel;
+
+    [SerializeField]
+    private Scrollbar inventorySlider;
+
+    [SerializeField]
+    private float sliderStep;
+
+    private RectTransform selectedRect;
+    private GameObject lastSelected;
+
+    //animation stuff
+    private Animator animator;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
+    private void Update()
+    {
+        animator.SetBool("IsOpen", UIManager.Instance.isInventoryOpen);
+
+        //get the top and bottom positions of the selected item
+        //if the top of the selected item is above the content panel Anchor max Y
+        GameObject selected = EventSystem.current.currentSelectedGameObject;
+
+        if(selected == null) { return; }
+        if(selected.transform.parent != contentPanel.transform) { return; }
+        if (selected == lastSelected) { return; }
+
+        selectedRect = selected.GetComponent<RectTransform>();
+
+        float selectedPos = Mathf.Abs(selectedRect.anchoredPosition.y) + selectedRect.rect.height;
+        float scrollMinY = contentPanel.anchoredPosition.y;
+        float scrollMaxY = contentPanel.anchoredPosition.y + scrollRect.rect.height;
+
+        if(selectedPos > scrollMaxY)
+        {
+            if(inventorySlider.value > 0 )
+            {
+                inventorySlider.value -= sliderStep * Time.deltaTime;
+
+            }
+        }
+        if(Mathf.Abs(selectedRect.anchoredPosition.y) - selectedRect.rect.height < scrollMinY)
+        {
+            if(inventorySlider.value < 1)
+            {
+
+                inventorySlider.value += sliderStep * Time.deltaTime;
+            }
+        }
     }
     public void InspectItem(Item item)
     {
@@ -73,5 +126,10 @@ public class InventoryUI : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(inventoryButtons[0]);
             Debug.Log("Selecting: " + EventSystem.current.currentSelectedGameObject.name);
         }
+    }
+
+    public void Close()
+    {
+        gameObject.SetActive(false);
     }
 }
