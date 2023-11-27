@@ -57,7 +57,9 @@ public class PlayerController : MonoBehaviour
     public bool InventoryOpen { get { return inventoryOpen; } set { inventoryOpen = value; } }
 
     private InventoryUI inventoryUI;
-    
+
+    private Item equippedItem;
+    public Item EquippedItem { get { return equippedItem; } set { equippedItem = value; } }
     private Vector2 playerTargetPos;
     private Rigidbody2D rb;
 
@@ -129,6 +131,7 @@ public class PlayerController : MonoBehaviour
         {
             if(closest.GetComponent<IInteractable>() != null)
             {
+                //determine what kind of interactable the object is and change icon to corrisponding prefab
                 interactIcon = Instantiate(interactIconPrefab, closest.transform);
             }
         }

@@ -94,8 +94,9 @@ public class InventoryUI : MonoBehaviour
             inspectPanel.SetActive(true);
             if (inspectPanel.GetComponentInChildren<InspectPanel>() != null)
             {
+                UIManager.Instance.CloseInventory();
                 InspectPanel inspect = inspectPanel.GetComponentInChildren<InspectPanel>();
-                inspect.SetInspect(item.ItemInspectSprite, item.ItemName, item.ItemDescription);
+                inspect.SetInspect(item.ItemSprite, item.ItemName, item.ItemDescription);
             }
 
         }
@@ -115,21 +116,34 @@ public class InventoryUI : MonoBehaviour
             //setup button in UI
             button.onClick.AddListener(() => InspectItem(newItem));
 
-            button.image.sprite = newItem.ItemInspectSprite;
+            button.image.sprite = newItem.ItemSprite;
         }
     }
     public void Open()
     {
+        inventorySlider.value = 1;
+
         Debug.Log(inventoryItems.Count);
         if(inventoryItems.Count > 0)
         {
+            foreach (GameObject item in inventoryButtons)
+            {
+                item.GetComponent<Button>().interactable = true;
+            }
+
             EventSystem.current.SetSelectedGameObject(inventoryButtons[0]);
             Debug.Log("Selecting: " + EventSystem.current.currentSelectedGameObject.name);
         }
     }
-
     public void Close()
     {
-        gameObject.SetActive(false);
+        //make all the items in the inventory uninteractable
+        if(inventoryItems.Count > 0)
+        {
+            foreach(GameObject item in inventoryButtons)
+            {
+                item.GetComponent<Button>().interactable = false;
+            }
+        }
     }
 }

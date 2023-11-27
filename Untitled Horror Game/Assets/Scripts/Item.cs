@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Item : MonoBehaviour, IInteractable
 {
     //holds all information for the inventory and inspection systems
@@ -14,8 +13,8 @@ public class Item : MonoBehaviour, IInteractable
     public string ItemDescription { get { return itemDescription; } }
 
     [SerializeField]
-    private Sprite itemInspectSprite;
-    public Sprite ItemInspectSprite { get { return itemInspectSprite; } }
+    private Sprite itemSprite;
+    public Sprite ItemSprite { get { return itemSprite; } }
 
     public void Interact()
     {

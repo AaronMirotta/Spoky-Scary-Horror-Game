@@ -36,7 +36,7 @@ public class UIManager : MonoBehaviour
     public void OpenInventory()
     {
         //set inventory active and select the first item in the inventory
-        inventoryUI.SetActive(true);
+        //inventoryUI.SetActive(true);
         isInventoryOpen = true;
 
         inventory.Open();
@@ -44,7 +44,10 @@ public class UIManager : MonoBehaviour
     }
     public void CloseInventory()
     {
-        inventoryUI.SetActive(false);
+        //inventoryUI.SetActive(false);
+
         isInventoryOpen = false;
+        inventory.Close();
+
     }
 }

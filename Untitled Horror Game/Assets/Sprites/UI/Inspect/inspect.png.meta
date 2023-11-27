@@ -113,10 +113,10 @@ TextureImporter:
       name: inspect_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 480
-        height: 480
+        x: 17
+        y: 7
+        width: 457
+        height: 463
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,10 +134,10 @@ TextureImporter:
       name: inspect_1
       rect:
         serializedVersion: 2
-        x: 480
-        y: 0
-        width: 480
-        height: 480
+        x: 494
+        y: 8
+        width: 453
+        height: 457
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,10 +155,10 @@ TextureImporter:
       name: inspect_2
       rect:
         serializedVersion: 2
-        x: 960
-        y: 0
-        width: 480
-        height: 480
+        x: 970
+        y: 10
+        width: 460
+        height: 465
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
