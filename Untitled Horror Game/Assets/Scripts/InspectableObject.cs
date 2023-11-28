@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class Item : MonoBehaviour, IInteractable
+
+public class InspectableObject : MonoBehaviour, IInteractable
 {
-    //holds all information for the inventory and inspection systems
+    //objects in the scene that can be inspected but not picked up
+    private InspectPanel inspectPanel;
+
     [SerializeField]
     private string itemName;
     public string ItemName { get { return itemName; } }
@@ -16,18 +19,15 @@ public class Item : MonoBehaviour, IInteractable
     private Sprite itemSprite;
     public Sprite ItemSprite { get { return itemSprite; } }
 
-    //flip option
+    //add flip option
 
     public void Interact()
     {
-        Pickup();
-    }
+        inspectPanel = FindObjectOfType<InspectPanel>();
+        //open inspect panel
+        inspectPanel.Open();
 
-    private void Pickup()
-    {
-        //add item to the players inventory
-        PlayerController.Instance.AddToInventory(this);
-
-        this.gameObject.SetActive(false);
+        //set inspect variables
+        inspectPanel.SetInspect(itemSprite, itemName, itemDescription);
     }
 }

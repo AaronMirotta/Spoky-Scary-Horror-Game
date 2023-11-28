@@ -85,6 +85,7 @@ public class InventoryUI : MonoBehaviour
     }
     public void InspectItem(Item item)
     {
+        //show prompt for equipping or inspecting
         if (inspectPanel.activeSelf)
         {
             inspectPanel.SetActive(false);

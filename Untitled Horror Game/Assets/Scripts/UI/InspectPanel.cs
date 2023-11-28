@@ -9,6 +9,9 @@ public class InspectPanel : MonoBehaviour
     //set the values for inspect panel
 
     [SerializeField]
+    private Animator animator;
+
+    [SerializeField]
     private Image itemSprite;
 
     [SerializeField]
@@ -16,6 +19,15 @@ public class InspectPanel : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI itemDescription;
+
+    public void Open()
+    {
+        animator.SetBool("IsOpen", true);
+    }
+    public void Close()
+    {
+        animator.SetBool("IsOpen", false);
+    }
 
     public void SetInspect(Sprite sprite, string name, string description)
     {

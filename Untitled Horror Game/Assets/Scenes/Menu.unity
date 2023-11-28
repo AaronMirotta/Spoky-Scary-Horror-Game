@@ -231,8 +231,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1550214338}
   m_HandleRect: {fileID: 1550214336}
   m_Direction: 0
-  m_Value: -0.0000019073486
-  m_Size: 0.96153843
+  m_Value: 0.0000009536725
+  m_Size: 0.9615384
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -766,7 +766,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -512, y: 0}
+  m_AnchoredPosition: {x: -513, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &237864224
@@ -1507,13 +1507,14 @@ GameObject:
   m_Component:
   - component: {fileID: 887538947}
   - component: {fileID: 887538948}
+  - component: {fileID: 887538949}
   m_Layer: 5
   m_Name: InspectPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &887538947
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1532,7 +1533,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5167314}
-  m_AnchoredPosition: {x: -0.000030518, y: 0}
+  m_AnchoredPosition: {x: -875, y: 0}
   m_SizeDelta: {x: 100, y: 91.04942}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &887538948
@@ -1556,6 +1557,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &887538949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 887538946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 001b47304aff0a640ae7de975d1b90c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 887538948}
+  itemSprite: {fileID: 1188195469}
+  itemName: {fileID: 808174428}
+  itemDescription: {fileID: 477678207}
 --- !u!1 &1117898065
 GameObject:
   m_ObjectHideFlags: 0
@@ -1666,7 +1683,6 @@ GameObject:
   - component: {fileID: 1142845319}
   - component: {fileID: 1142845322}
   - component: {fileID: 1142845321}
-  - component: {fileID: 1142845320}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -1697,21 +1713,6 @@ RectTransform:
   m_AnchoredPosition: {x: 37.25091, y: -3.7251015}
   m_SizeDelta: {x: 774.8715, y: 351.3509}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1142845320
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1142845318}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 001b47304aff0a640ae7de975d1b90c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemSprite: {fileID: 1188195469}
-  itemName: {fileID: 808174428}
-  itemDescription: {fileID: 477678207}
 --- !u!114 &1142845321
 MonoBehaviour:
   m_ObjectHideFlags: 0
