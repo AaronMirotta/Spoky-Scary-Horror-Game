@@ -48,8 +48,12 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private GameObject interactIcon;
+
     [SerializeField]
     private float interactRange;
+
+    [SerializeField]
+    private Vector2 iconOffset;
 
     //Inventory
     [SerializeField]
@@ -132,7 +136,11 @@ public class PlayerController : MonoBehaviour
             if(closest.GetComponent<IInteractable>() != null)
             {
                 //determine what kind of interactable the object is and change icon to corrisponding prefab
-                interactIcon = Instantiate(interactIconPrefab, closest.transform);
+
+                Debug.Log("BOunds: " + closest.bounds.max.y);
+                Vector3 offset = new Vector3(iconOffset.x, iconOffset.y + closest.bounds.extents.y, 0);
+                Vector3 newPos = closest.transform.position + offset;
+                interactIcon = Instantiate(interactIconPrefab, newPos, Quaternion.identity);
             }
         }
         else
@@ -147,8 +155,8 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
-                    interactIcon.transform.parent = closest.transform;
-                    interactIcon.transform.position = closest.transform.position;
+                    //interactIcon.transform.parent = closest.transform;
+                    //interactIcon.transform.position = closest.transform.position;
                 }
             }
             else

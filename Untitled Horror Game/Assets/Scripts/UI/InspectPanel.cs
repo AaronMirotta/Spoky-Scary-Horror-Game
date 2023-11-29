@@ -20,6 +20,8 @@ public class InspectPanel : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI itemDescription;
 
+    //add flip button
+
     public void Open()
     {
         animator.SetBool("IsOpen", true);

@@ -30,4 +30,8 @@ public class InspectableObject : MonoBehaviour, IInteractable
         //set inspect variables
         inspectPanel.SetInspect(itemSprite, itemName, itemDescription);
     }
+    public void Use(Item equippedItem)
+    {
+        //if the player has an item equipped then check if it is the right item
+    }
 }

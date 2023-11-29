@@ -254,7 +254,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ac0a09963c3d0e4d9b9cdc964c91f57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentMovementMethod: 0
   speed: 5
   groundPos: {x: 0, y: -0.6, z: 0}
   groundRadius: 0.75
@@ -266,3 +265,5 @@ MonoBehaviour:
   interactIconPrefab: {fileID: 9098403885084876099, guid: f90472fecbc7457439498de05175132c, type: 3}
   interactIcon: {fileID: 0}
   interactRange: 3
+  iconOffset: {x: 0, y: 0.5}
+  inventoryOpen: 0
